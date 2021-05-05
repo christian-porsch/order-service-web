@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import de.neuefische.orderserviceweb.model.Order;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -15,8 +16,11 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-
     public List<Order> listAllOrders() {
         return orderRepository.listAllOrders();
+    }
+
+    public Optional<Order> getOrderById(String orderId) {
+        return orderRepository.getOrderById(orderId);
     }
 }

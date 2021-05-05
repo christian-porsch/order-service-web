@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class OrderRepository {
@@ -16,6 +17,15 @@ public class OrderRepository {
     ));
     public List<Order> listAllOrders() {
         return orderList;
+    }
+
+    public Optional<Order> getOrderById(String orderId) {
+        for(Order order : orderList){
+            if(order.getId().equals(orderId)){
+                return Optional.of(order);
+            }
+        }
+        return Optional.empty();
     }
 
     /* ToDo: 

@@ -3,12 +3,15 @@ package de.neuefische.orderserviceweb.controller;
 import de.neuefische.orderserviceweb.model.Order;
 import de.neuefische.orderserviceweb.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("order")
@@ -26,8 +29,12 @@ public class OrderController {
         return orderService.listAllOrders();
     }
 
-    /*@GetMapping("{orderId}")
+    @GetMapping("{orderId}")
     public Order getOrderById(@PathVariable String orderId) {
-
-    }*/
+        Optional<Order> optionalOrder = orderService.getOrderById(orderId);
+        if(optionalOrder.isPresent()) {
+            return optionalOrder.get();
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "order with id " + orderId + " not found" + "https://http.cat/404");
+    }
 }

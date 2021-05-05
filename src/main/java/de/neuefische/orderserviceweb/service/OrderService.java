@@ -23,4 +23,8 @@ public class OrderService {
     public Optional<Order> getOrderById(String orderId) {
         return orderRepository.getOrderById(orderId);
     }
+
+    public Order addOrder(Order newOrder) {
+        return orderRepository.addOrder(newOrder);
+    }
 }

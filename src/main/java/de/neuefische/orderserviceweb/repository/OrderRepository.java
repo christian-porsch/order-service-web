@@ -28,6 +28,11 @@ public class OrderRepository {
         return Optional.empty();
     }
 
+    public Order addOrder(Order newOrder) {
+        orderList.add(newOrder);
+        return newOrder;
+    }
+
     /* ToDo: 
         -AddOrder
         -GetOrder

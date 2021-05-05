@@ -1,8 +1,6 @@
 package de.neuefische.orderserviceweb.service;
 
-import de.neuefische.orderserviceweb.model.Order;
 import de.neuefische.orderserviceweb.model.Product;
-import de.neuefische.orderserviceweb.repository.OrderRepository;
 import de.neuefische.orderserviceweb.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +23,13 @@ public class ProductService {
 
     public Optional<Product> getProductById(String productId) {
         return productRepository.getProductById(productId);
+    }
+
+    public Optional<Product> addProduct(Product newProduct) {
+        if(productRepository.getProductRepoMap().containsKey(newProduct.getId())){
+            return Optional.empty();
+        }
+
+        return Optional.of(productRepository.addProduct(newProduct));
     }
 }

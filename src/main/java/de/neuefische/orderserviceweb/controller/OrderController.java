@@ -4,10 +4,7 @@ import de.neuefische.orderserviceweb.model.Order;
 import de.neuefische.orderserviceweb.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -36,5 +33,10 @@ public class OrderController {
             return optionalOrder.get();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "order with id " + orderId + " not found" + "https://http.cat/404");
+    }
+
+    @PostMapping("addOrder")
+    public Order addOrder(@RequestBody Order newOrder){
+        return orderService.addOrder(newOrder);
     }
 }

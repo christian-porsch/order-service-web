@@ -1,13 +1,11 @@
 package de.neuefische.orderserviceweb.controller;
 
+import de.neuefische.orderserviceweb.model.Order;
 import de.neuefische.orderserviceweb.model.Product;
 import de.neuefische.orderserviceweb.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -35,9 +33,19 @@ public class ProductController {
         if (optionalProduct.isPresent()) {
             return optionalProduct.get();
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "product with id " + productId + " not found" + "https://http.cat/404");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "product with id " +
+                productId + " not found" + "https://http.cat/404");
     }
 
+    @PostMapping("addProduct")
+    public Optional<Product> addProduct(@RequestBody Product newProduct){
+        Optional<Product> optionalProduct = productService.addProduct(newProduct);
+        if(optionalProduct.isPresent()) {
+            return optionalProduct;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "product with id " +
+                newProduct + " does already exist" + " https://http.cat/404");
+    }
 
 }
 

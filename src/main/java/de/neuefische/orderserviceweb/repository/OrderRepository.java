@@ -32,9 +32,4 @@ public class OrderRepository {
         orderList.add(newOrder);
         return newOrder;
     }
-
-    /* ToDo: 
-        -AddOrder
-        -GetOrder
-    */
 }

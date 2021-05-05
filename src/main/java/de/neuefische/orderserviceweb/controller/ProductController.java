@@ -1,6 +1,5 @@
 package de.neuefische.orderserviceweb.controller;
 
-import de.neuefische.orderserviceweb.model.Order;
 import de.neuefische.orderserviceweb.model.Product;
 import de.neuefische.orderserviceweb.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
